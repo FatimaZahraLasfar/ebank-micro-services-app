@@ -20,7 +20,7 @@ public class CustomerServiceApplication {
     @Bean
     CommandLineRunner commandLineRunner(CustomerService customerService) {
         return args -> {
-            List<String> names = Arrays.asList("Fatima", "Zahra", "Malak");
+            List<String> names = Arrays.asList("fatima", "zahra", "malak");
             names.forEach(name -> {
                 customerService.saveCustomer(Customer.builder()
                         .name(name)
