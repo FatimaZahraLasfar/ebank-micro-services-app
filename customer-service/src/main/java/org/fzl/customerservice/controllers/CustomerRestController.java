@@ -14,11 +14,11 @@ public class CustomerRestController {
         this.customerService = customerService;
     }
 
-    @GetMapping("/Customers")
+    @GetMapping("/customers")
     public List<Customer> getAllCustomers(){
         return customerService.getAllCustomers();
     }
-    @GetMapping("/Customers/{id}")
+    @GetMapping("/customers/{id}")
     public Customer findCustomerById(@PathVariable Long id){
         return customerService.findCustomerById(id);
     }
