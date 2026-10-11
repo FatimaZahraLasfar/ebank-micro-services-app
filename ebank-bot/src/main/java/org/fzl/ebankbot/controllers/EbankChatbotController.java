@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class EbankChatbotController {
 
     private final EBankAIAgent eBankAIAgent;
-
+    private ChatMemory chatMemory;
     public EbankChatbotController(EBankAIAgent eBankAIAgent, ChatMemory chatMemory) {
         this.eBankAIAgent =eBankAIAgent;
+        this.chatMemory=chatMemory;
     }
 
     @GetMapping("/chat")
