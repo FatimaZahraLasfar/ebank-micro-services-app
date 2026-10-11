@@ -14,6 +14,7 @@ public class EBankAIAgent {
                         ToolCallbackProvider tools) {
         this.chatClient = builder
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
+                .defaultTools(tools)
                 .build();
     }
 
