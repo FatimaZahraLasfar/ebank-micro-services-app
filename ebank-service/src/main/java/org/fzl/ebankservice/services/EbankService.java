@@ -31,14 +31,15 @@ public class EbankService {
                 customerRestClient.getCustomerById(bankAccount.getCustomerId()));
         return bankAccount;
     }
-    public BankAccount save(BankAccount bankAccount){
-        try{
-            Customer customer = customerRestClient.getCustomerById(bankAccount.getCustomerId());
-            bankAccount.setId(UUID.randomUUID().toString());
-            bankAccount.setCreatedAt(new Date());
-            return accountRepository.save(bankAccount);
-        }catch(Exception e){
-            throw new RuntimeException(e.getMessage());
+    public BankAccount save(BankAccount bankAccount) {
+        bankAccount.setId(UUID.randomUUID().toString());
+        bankAccount.setCreatedAt(new Date());
+        try {
+            customerRestClient.getCustomerById(bankAccount.getCustomerId());
+        } catch (Exception e) {
+            throw new RuntimeException("Customer " + bankAccount.getCustomerId()
+                    + " not found, cannot create account", e);
         }
+        return accountRepository.save(bankAccount);
     }
 }
