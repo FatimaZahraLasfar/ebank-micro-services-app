@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 public class EBankAIAgent {
     private final ChatClient chatClient;
 
-    public EBankAIAgent(ChatClient.Builder builder, ChatMemory chatMemory) {
+    public EBankAIAgent(ChatClient.Builder builder,
+                        ChatMemory chatMemory,
+                        ToolCallbackProvider tools) {
         this.chatClient = builder
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .build();
