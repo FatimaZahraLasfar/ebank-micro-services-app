@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class EbankChatbotController {
     private ChatClient chatClient;
 
-    public EbankChatbotController(ChatClient.Builder chatClient){
-        this.chatClient = chatClient.build();
+    public EbankChatbotController(ChatClient.Builder chatClient, ChatMemory chatMemory){
+        this.chatClient = chatClient
+                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
+                .build();
     }
 
     @GetMapping("/chat")
