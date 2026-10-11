@@ -13,7 +13,7 @@ public class EbankService {
     private CustomerRestClient customerRestClient;
     private BankAccountRepository accountRepository;
 
-    public EbankService(BankAccountRepository accountRepository){
+    public EbankService(BankAccountRepository accountRepository, CustomerRestClient customerRestClient){
         this.accountRepository = accountRepository;
     }
 
