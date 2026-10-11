@@ -15,6 +15,6 @@ public interface CustomerRestClient {
 
 
     default Customer getDefaultCustomer(Exception e, Long id){
-        return new Customer(id,"NoName","NoEmail");
+        return new Customer(id,"Not available","Not available");
     }
 }
