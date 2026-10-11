@@ -35,10 +35,9 @@ public class EBankAIAgent {
                 .build();
     }
 
-    public String chat(String query,String conversationId) {
+    public String chat(String query) {
 
         return chatClient.prompt(query)
-                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
                 .call()
                 .content();
     }
