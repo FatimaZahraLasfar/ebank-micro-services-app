@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @Service
 public class EbankService {
+    private CustomerRestClient customerRestClient;
     private BankAccountRepository accountRepository;
 
     public EbankService(BankAccountRepository accountRepository){
