@@ -2,6 +2,7 @@ package org.fzl.ebankbot.controllers;
 
 import org.fzl.ebankbot.agents.EBankAIAgent;
 import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
