@@ -1,22 +1,24 @@
 package org.fzl.ebankbot.controllers;
 
-import org.springframework.ai.chat.client.ChatClient;
+import org.fzl.ebankbot.agents.EBankAIAgent;
+import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class EbankChatbotController {
-    private ChatClient chatClient;
 
-    public EbankChatbotController(ChatClient.Builder chatClient, ChatMemory chatMemory){
-        this.chatClient = chatClient
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
-                .build();
+    private final EBankAIAgent eBankAIAgent;
+
+    public EbankChatbotController(EBankAIAgent eBankAIAgent, ChatMemory chatMemory) {
+        this.eBankAIAgent =eBankAIAgent;
     }
 
     @GetMapping("/chat")
-    public String chat(@RequestParam(name="query",defaultValue = "Hello") String query){
-        return chatClient.prompt(query).call().content();
+    public String chat(
+            @RequestParam(name = "query", defaultValue = "Hello") String query,
+            @RequestParam(name = "conversationId", defaultValue = "default") String conversationId) {
+        return eBankAIAgent.chat(query,conversationId);
     }
 }
