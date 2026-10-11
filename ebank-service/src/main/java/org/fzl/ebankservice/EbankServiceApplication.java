@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.UUID;
 
 @SpringBootApplication
+@EnableFeignClients
 public class EbankServiceApplication {
 
     public static void main(String[] args) {
