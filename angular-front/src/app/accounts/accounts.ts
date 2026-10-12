@@ -6,4 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './accounts.html',
   styleUrl: './accounts.css',
 })
-export class Accounts {}
+export class Accounts {
+  private http = inject(HttpClient);
+}
