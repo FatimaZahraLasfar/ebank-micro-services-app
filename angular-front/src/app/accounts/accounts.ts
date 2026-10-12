@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-accounts',
@@ -8,4 +9,5 @@ import { Component } from '@angular/core';
 })
 export class Accounts {
   private http = inject(HttpClient);
+  accounts$ = this.http.get("http://localhost:9999/EBANK-SERVICE/accounts")
 }
