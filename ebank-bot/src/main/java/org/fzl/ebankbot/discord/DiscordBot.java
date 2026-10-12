@@ -1,24 +1,37 @@
 package org.fzl.ebankbot.discord;
 
-import com.zgamelogic.discord.annotations.DiscordController;
-import com.zgamelogic.discord.annotations.DiscordMapping;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.fzl.ebankbot.agents.EBankAIAgent;
-import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.stereotype.Service;
 
-@DiscordController
-public class DiscordBot {
-    private EBankAIAgent eBankAIAgent;
+import jakarta.annotation.PostConstruct;
 
-    public DiscordBot(EBankAIAgent eBankAIAgent){
-       this.eBankAIAgent=eBankAIAgent;}
+@Service
+public class DiscordBot extends ListenerAdapter {
 
-      @DiscordMapping
-      private void perform(MessageReceivedEvent event){
-        System.out.println(event);
-        if(event.getAuthor().isBot()) return;
+    private final JDA jda;
+    private final EBankAIAgent agent;
+
+    public DiscordBot(JDA jda, EBankAIAgent agent) {
+        this.jda = jda;
+        this.agent = agent;
+    }
+
+    @PostConstruct
+    public void register() {
+        jda.addEventListener(this);
+    }
+
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) {
+        if (event.getAuthor().isBot()) return;
+
         String query = event.getMessage().getContentRaw();
-        String response = eBankAIAgent.chat(query);
+        if (query == null || query.isBlank()) return;
+
+        String response = agent.chat(query);
         event.getChannel().sendMessage(response).queue();
     }
 }
