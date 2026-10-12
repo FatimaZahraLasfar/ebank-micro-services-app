@@ -31,12 +31,11 @@ public class EBankAIAgent {
                    getAllCustomers immédiatement.
                 """)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
-                .defaultTools(tools)
+                .defaultToolCallbacks(tools)
                 .build();
     }
 
     public String chat(String query) {
-
         return chatClient.prompt(query)
                 .call()
                 .content();
