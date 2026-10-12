@@ -3,6 +3,7 @@ package org.fzl.ebankbot.agents;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.tool.ToolCallbackProvider;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 
 @Service
 public class EBankAIAgent {
@@ -31,6 +32,11 @@ public class EBankAIAgent {
     public String chat(String query) {
         return chatClient.prompt(query)
                 .call()
+                .content();
+    }
+    public Flux<String> chatStream(String query) {
+        return chatClient.prompt(query)
+                .stream()
                 .content();
     }
 }
