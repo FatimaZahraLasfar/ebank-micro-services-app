@@ -5,7 +5,11 @@ export interface Account {
   type? : String,
   customerId? : number
 }
-
-export interface AccountList{
-  accounts : Account[]
+export enum RequestStatus {
+  SUCCESS , ERROR
+}
+export interface AccountListState {
+  accounts? : Account[]
+  status? : RequestStatus,
+  errorMessage? : string
 }
